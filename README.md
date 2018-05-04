@@ -37,22 +37,22 @@ This file will automatically be loaded by pipenv.
 ## Initialize the database
 
 ```
-$ pipenv run python app.py init_db
+$ prp app.py init_db
 ```
 
 ## Load data from existing Excel and CSV files.
 
 ```
-$ pipenv run python app.py load_analysis <path to file>
-$ pipenv run python app.py load_sales_order --item <path to file>
-$ pipenv run python app.py load_sales_order --item_status <path to file>
-$ pipenv run python app.py load_sales_order --item_status_history <path to file>
+$ prp app.py load_analysis <path to file>
+$ prp app.py load_sales_order --item <path to file>
+$ prp app.py load_sales_order --item_status <path to file>
+$ prp app.py load_sales_order --item_status_history <path to file>
 ```
 
 ## Running the server and viewing the dashboard.
 
 ```
-$ pipenv run python app.py run
+$ prp app.py run
 ```
 
 ## License
