@@ -42,27 +42,53 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseAnalysis">
             <li>
-              <a href="{{ url_for('analysis.regions') }}">Regions</a>
+              <a href="{{ url_for('analysis:regions') }}">Regions</a>
             </li>
             <li>
-              <a href="{{ url_for('analysis.packages') }}">Packages</a>
+              <a href="{{ url_for('analysis:packages') }}">Packages</a>
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sales Order">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sales Orders">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSalesOrder" data-parent="#mainAccordion">
             <i class="fa fa-fw fa-dollar-sign"></i>
             <span class="nav-link-text">Sales Orders</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseSalesOrder">
             <li>
-              <a href="{{ url_for('sales_order.items') }}">Items</a>
+              <a href="{{ url_for('sales_order:items') }}">Items</a>
             </li>
             <li>
-              <a href="{{ url_for('sales_order.status') }}">Status</a>
+              <a href="{{ url_for('sales_order:status') }}">Status</a>
             </li>
             <li>
-              <a href="{{ url_for('sales_order.history') }}">History</a>
+              <a href="{{ url_for('sales_order:history') }}">History</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Custom Situations">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCustomSituations" data-parent="#mainAccordion">
+            <i class="fa fa-fw fa-dollar-sign"></i>
+            <span class="nav-link-text">Custom Situations</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseCustomSituations">
+            <li>
+              <a href="{{ url_for('custom:2.1') }}">Situation 2.1</a>
+            </li>
+            <li>
+              <a href="{{ url_for('custom:2.2') }}">Situation 2.2</a>
+            </li>
+            <li>
+              <a href="{{ url_for('custom:2.3') }}">Situation 2.3</a>
+            </li>
+            <li>
+              <a href="{{ url_for('custom:2.4') }}">Situation 2.4</a>
+            </li>
+            <li>
+              <a href="{{ url_for('custom:2.5') }}">Situation 2.5</a>
+            </li>
+            <li>
+              <a href="{{ url_for('custom:2.6') }}">Situation 2.6</a>
             </li>
           </ul>
         </li>

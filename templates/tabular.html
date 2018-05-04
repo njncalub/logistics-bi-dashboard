@@ -10,7 +10,14 @@
   <li class="breadcrumb-item active">Tables</li>
   {% endblock breadcrumb_items %}
 </ol>
-<!-- Example DataTables Card-->
+
+{% if context['description'] %}
+<div><p>{{ context['description'] }}
+{% if context['query'] %}<a href="#" data-toggle="modal" data-target="#queryModal">View Query</a>{% endif %}
+</p>
+</div>
+{% endif %}
+
 <div class="card mb-3">
   <div class="card-header">
     <i class="fa fa-table"></i> {% block table_title %}{{ context['title'] }}{% endblock table_title %}</div>

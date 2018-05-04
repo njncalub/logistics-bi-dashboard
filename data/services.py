@@ -28,6 +28,7 @@ class DataService(object):
         
         self.engine = engine
         db_engine = create_engine(engine)
+        self.db_engine = db_engine
         db_session = sessionmaker(bind=db_engine)
         self.session = db_session()
     
