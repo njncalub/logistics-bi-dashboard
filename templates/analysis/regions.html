@@ -1,0 +1,16 @@
+{% extends "tabular.html" %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item">Analysis</li>
+<li class="breadcrumb-item active">{{ context['title'] }}</li>
+{% endblock breadcrumb_items %}
+
+{% block table_body %}
+  {% for row in context['rows'] %}
+  <tr>
+    <td>{{ row.id }}</td>
+    <td>{{ row.region }}</td>
+    <td>{{ row.major_region }}</td>
+  </tr>
+  {% endfor %}
+{% endblock table_body %}

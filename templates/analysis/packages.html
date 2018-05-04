@@ -1,0 +1,20 @@
+{% extends "tabular.html" %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item">Analysis</li>
+<li class="breadcrumb-item active">{{ context['title'] }}</li>
+{% endblock breadcrumb_items %}
+
+{% block table_body %}
+  {% for row in context['rows'] %}
+  <tr>
+    <td>{{ row.id }}</td>
+    <td>{{ row.address }}</td>
+    <td>{{ row.region.major_region }}</td>
+    <td>{{ row.package_number }}</td>
+    <td>{{ row.shipped_at }}</td>
+    <td>{{ row.delivered_at }}</td>
+    <td>{{ row.lead_time }}</td>
+  </tr>
+  {% endfor %}
+{% endblock table_body %}

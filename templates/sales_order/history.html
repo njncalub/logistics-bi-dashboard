@@ -1,0 +1,17 @@
+{% extends "tabular.html" %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item">Sales Order</li>
+<li class="breadcrumb-item active">{{ context['title'] }}</li>
+{% endblock breadcrumb_items %}
+
+{% block table_body %}
+  {% for row in context['rows'] %}
+  <tr>
+    <td>{{ row.id_sales_order_item_status_history }}</td>
+    <td>{{ row.sales_order_item.name }}</td>
+    <td>{{ row.sales_order_item_status.status }}</td>
+    <td>{{ row.created_at }}</td>
+  </tr>
+  {% endfor %}
+{% endblock table_body %}

@@ -1,0 +1,31 @@
+{% extends "tabular.html" %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item">Sales Order</li>
+<li class="breadcrumb-item active">{{ context['title'] }}</li>
+{% endblock breadcrumb_items %}
+
+{% block table_body %}
+  {% for row in context['rows'] %}
+  <tr>
+    <td>{{ row.id_sales_order_item }}</td>
+    <td>{{ row.bob_id_sales_order_item }}</td>
+    <td>{{ row.fk_sales_order }}</td>
+    <td>{{ row.fk_sales_order_item_status }}</td>
+    <td>{{ row.fk_delivery_type }}</td>
+    <td>{{ row.unit_price }}</td>
+    <td>{{ row.tax_amount }}</td>
+    <td>{{ row.paid_price }}</td>
+    <td>{{ row.name }}</td>
+    <td>{{ row.sku }}</td>
+    <td>{{ row.created_at }}</td>
+    <td>{{ row.updated_at }}</td>
+    <td>{{ row.last_status_change }}</td>
+    <td>{{ row.original_unit_price }}</td>
+    <td>{{ row.shipping_type }}</td>
+    <td>{{ row.real_delivery_date }}</td>
+    <td>{{ row.bob_id_supplier }}</td>
+    <td>{{ row.is_marketplace }}</td>
+  </tr>
+  {% endfor %}
+{% endblock table_body %}

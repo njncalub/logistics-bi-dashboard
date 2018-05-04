@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/">Dashboard</a>
+  </li>
+  {% block breadcrumb_items %}
+  <li class="breadcrumb-item active">Tables</li>
+  {% endblock breadcrumb_items %}
+</ol>
+<!-- Example DataTables Card-->
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fa fa-table"></i> {% block table_title %}{{ context['title'] }}{% endblock table_title %}</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+          {% block table_header %}
+          {% for text in context['headers'] %}
+            <th>{{ text }}</th>
+          {% endfor %}
+          {% endblock table_header %}
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+          {% block table_footer %}
+          {% for text in context['headers'] %}
+            <th>{{ text }}</th>
+          {% endfor %}
+          {% endblock table_footer %}
+          </tr>
+        </tfoot>
+        <tbody>
+          {% block table_body %}
+          {% endblock table_body %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted">{% block table_info %}{% endblock table_info %}</div>
+</div>
+{% endblock %}

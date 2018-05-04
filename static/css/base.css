@@ -1,4 +1,12 @@
-#mainNav.navbar-dark .navbar-collapse .navbar-sidenav >.nav-item .sidenav-second-level > li,
-#mainNav.navbar-dark .navbar-collapse .navbar-sidenav>.nav-item .sidenav-third-level > li {
+#mainNav {
+    background-color: #f57224 !important;
+}
+
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li,
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li {
     background-color: #50585f;
+}
+
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
+    color: #f57224;
 }

@@ -10,7 +10,18 @@ class DataService(object):
     Service for handling the database connection.
     """
     
+    __shared_state = {}  # Borg design pattern's shared state.
+    __instantiated = False
+    
     def __init__(self, engine):
+        self.__dict__ = self.__shared_state
+        
+        # exit if already instantiated
+        if self.__instantiated:
+            return
+        else:
+            self.__instantiated = True
+        
         if not engine:
             raise ValueError('The values specified in engine parameter has ' \
                              'to be supported by SQLAlchemy.')
@@ -68,6 +79,15 @@ class DataService(object):
             
             self.session.add(package)
             self.session.commit()
+    
+    def get_packages(self, package_number=None):
+        if package_number:
+            found = self.session.query(Package).filter(
+                Package.package_number == package_number)
+        else:
+            found = self.session.query(Package).all()
+        
+        return found
     
     def add_package(self, address, region, package_number, shipped_at,
                     delivered_at, lead_time=None, id_=None):
@@ -169,3 +189,30 @@ class DataService(object):
         self.session.commit()
         
         return new_history
+    
+    def get_items(self, pk=None):
+        if pk:
+            found = self.session.query(Item).filter(
+                Item.id_sales_order_item == pk)
+        else:
+            found = self.session.query(Item).all()
+        
+        return found
+    
+    def get_status(self, pk=None):
+        if pk:
+            found = self.session.query(ItemStatus).filter(
+                ItemStatus.id_sales_order_item_status == pk)
+        else:
+            found = self.session.query(ItemStatus).all()
+        
+        return found
+    
+    def get_history(self, pk=None):
+        if pk:
+            found = self.session.query(ItemStatusHistory).filter(
+                ItemStatusHistory.id_sales_order_item_status_history == pk)
+        else:
+            found = self.session.query(ItemStatusHistory).all()
+        
+        return found

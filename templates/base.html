@@ -23,23 +23,29 @@
   
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="/#">Logistiko</a>
+    <a class="navbar-brand" href="{{ url_for('homepage') }}">Logistiko</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="mainAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Packages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePackages" data-parent="#mainAccordion">
-            <i class="fa fa-fw fa-box"></i>
-            <span class="nav-link-text">Packages</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="{{ url_for('homepage') }}">
+            <i class="fa fa-fw fa-home"></i>
+            <span class="nav-link-text">Home</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapsePackages">
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Analysis">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAnalysis" data-parent="#mainAccordion">
+            <i class="fa fa-fw fa-chart-bar"></i>
+            <span class="nav-link-text">Analysis</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseAnalysis">
             <li>
-              <a href="/#packages">Packages</a>
+              <a href="{{ url_for('analysis.regions') }}">Regions</a>
             </li>
             <li>
-              <a href="/#regions">Regions</a>
+              <a href="{{ url_for('analysis.packages') }}">Packages</a>
             </li>
           </ul>
         </li>
@@ -50,17 +56,17 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseSalesOrder">
             <li>
-              <a href="/#items">Items</a>
+              <a href="{{ url_for('sales_order.items') }}">Items</a>
             </li>
             <li>
-              <a href="/#status">Status</a>
+              <a href="{{ url_for('sales_order.status') }}">Status</a>
             </li>
             <li>
-              <a href="/#history">History</a>
+              <a href="{{ url_for('sales_order.history') }}">History</a>
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="View Source">
           <a class="nav-link" href="https://github.com/njncalub/logistiko">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">View Source</span>
@@ -72,20 +78,6 @@
           <a class="nav-link text-center" id="sidenavToggler">
             <i class="fa fa-fw fa-angle-left"></i>
           </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
         </li>
       </ul>
     </div>
@@ -115,10 +107,10 @@
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
   <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
   
-  <script src="{{url_for('static', filename='vendor/sb-admin/js/sb-admin.min.js')}}" type="text/javascript"></script>
-  <script src="{{url_for('static', filename='vendor/sb-admin/js/sb-admin-datatables.min.js')}}" type="text/javascript"></script>
-  <script src="{{url_for('static', filename='vendor/sb-admin/js/sb-admin-charts.min.js')}}" type="text/javascript"></script>
-  <script src="{{url_for('static', filename='js/base.js')}}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='vendor/sb-admin/js/sb-admin.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='vendor/sb-admin/js/sb-admin-datatables.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='vendor/sb-admin/js/sb-admin-charts.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/base.js') }}" type="text/javascript"></script>
   {% block extra_body %}
   {% endblock extra_body %}
 </body>
