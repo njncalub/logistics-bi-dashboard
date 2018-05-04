@@ -4,7 +4,7 @@
 """Logistiko: Business Intelligence Dashboard.
 
 Usage:
-  app.py init_db
+  app.py (init|drop) db
   app.py load analysis <FILE>
   app.py load sales_order (--item|--item_status|--item_status_history) <FILE>
   app.py run
@@ -27,8 +27,11 @@ from parsers import load_analysis_from_file
 def main(args):
     db = DataService(engine=settings.DATABASE_URL)
     
-    if args['init_db']:
-        db.init_database()
+    if args['init'] and args['db']:
+        init_db(db_service=db)
+    
+    elif args['drop'] and args['db']:
+        drop_db(db_service=db)
     
     elif args['load'] and args['analysis']:
         file_path = args['<FILE>']
@@ -36,7 +39,7 @@ def main(args):
         if not file_path:  # should automatically be handled by docopt
             return
         
-        load_analysis(path=file_path)
+        load_analysis(path=file_path, db_service=db)
     
     elif args['load'] and args['sales_order']:
         file_path = args['<FILE>']
@@ -55,12 +58,20 @@ def main(args):
         run()
 
 
-def init_db():
-    pass
+def init_db(db_service):
+    print('Initializing the database...')
+    db_service.drop_database()
+    db_service.init_database()
 
 
-def load_analysis(path):
-    load_analysis_from_file(path)
+def drop_db(db_service):
+    print('Dropping the database...')
+    db_service.drop_database()
+
+
+def load_analysis(path, db_service):
+    print('Loading the analysis file...')
+    load_analysis_from_file(path=path, db_service=db_service)
 
 
 def load_sales_order(table, path):
@@ -73,19 +84,19 @@ def load_sales_order(table, path):
 
 
 def load_sales_order_item(path):
-    pass
+    print('Loading Sales Order Item...')
 
 
 def load_sales_order_item_status(path):
-    pass
+    print('Loading Sales Order Item Status...')
 
 
 def load_sales_order_item_status_history(path):
-    pass
+    print('Loading Sales Order Item Status History...')
 
 
 def run():
-    pass
+    print('Running the server...')
 
 
 if __name__ == '__main__':

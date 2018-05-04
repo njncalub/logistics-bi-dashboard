@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, ForeignKey, Integer, Interval, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, Interval, String
 from sqlalchemy.orm import relationship
 
 from .models import BaseModel
@@ -9,11 +9,13 @@ class Package(BaseModel):
     
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     address = Column(String(100))
-    region = Column(Integer, ForeignKey('region.id'))
+    region_id = Column(Integer, ForeignKey('region.id',
+                                           ondelete='CASCADE'))
+    region = relationship('Region', backref='packages')
     package_number = Column(String(20))
-    shipped_at = Column(Date)
-    delivered_at = Column(Date)
-    lead_time = Column(String(20))
+    shipped_at = Column(DateTime)
+    delivered_at = Column(DateTime)
+    lead_time = Column(Interval)
     
     def serialize(self):
         return {
