@@ -1,4 +1,4 @@
-# BI Dashboard for Logistics
+# Logistics Business Intelligence Dashboard
 
 Sample project for emulating the Business Intelligence dashboards of logistics applications.
 
@@ -43,10 +43,10 @@ $ prp app.py init_db
 ## Load data from existing Excel and CSV files.
 
 ```
-$ prp app.py load_analysis <path to file>
-$ prp app.py load_sales_order --item <path to file>
-$ prp app.py load_sales_order --item_status <path to file>
-$ prp app.py load_sales_order --item_status_history <path to file>
+$ prp app.py load analysis <path to file>
+$ prp app.py load sales_order --item <path to file>
+$ prp app.py load sales_order --item_status <path to file>
+$ prp app.py load sales_order --item_status_history <path to file>
 ```
 
 ## Running the server and viewing the dashboard.

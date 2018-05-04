@@ -5,8 +5,8 @@
 
 Usage:
   app.py init_db
-  app.py load_analysis <FILE>
-  app.py load_sales_order (--item|--item_status|--item_status_history) <FILE>
+  app.py load analysis <FILE>
+  app.py load sales_order (--item|--item_status|--item_status_history) <FILE>
   app.py run
   app.py (-h | --help)
   app.py --version
@@ -19,12 +19,14 @@ Options:
 
 from docopt import docopt
 
+from parsers import load_analysis_from_file
+
 
 def main(args):
     if args['init_db']:
         init_db()
     
-    elif args['load_analysis']:
+    elif args['load'] and args['analysis']:
         file_path = args['<FILE>']
         
         if not file_path:  # should automatically be handled by docopt
@@ -32,7 +34,7 @@ def main(args):
         
         load_analysis(path=file_path)
     
-    elif args['load_sales_order']:
+    elif args['load'] and args['sales_order']:
         file_path = args['<FILE>']
         
         if not file_path:  # should automatically be handled by docopt
@@ -54,7 +56,7 @@ def init_db():
 
 
 def load_analysis(path):
-    pass
+    load_analysis_from_file(path)
 
 
 def load_sales_order(table, path):
