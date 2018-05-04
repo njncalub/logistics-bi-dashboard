@@ -1,0 +1,4 @@
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav >.nav-item .sidenav-second-level > li,
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav>.nav-item .sidenav-third-level > li {
+    background-color: #50585f;
+}

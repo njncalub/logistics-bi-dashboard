@@ -59,10 +59,10 @@ $ app init db
 ## Load data from existing Excel and CSV files
 
 ```
-$ app load analysis <path_to_file>
-$ app load sales_order --status <path_to_file>
-$ app load sales_order --item <path_to_file>
-$ app load sales_order --history <path_to_file>
+$ app load analysis <path/to/file.ext>
+$ app load sales_order --status <path/to/file.ext>
+$ app load sales_order --item <path/to/file.ext>
+$ app load sales_order --history <path/to/file.ext>
 ```
 
 ## Running the server and viewing the dashboard

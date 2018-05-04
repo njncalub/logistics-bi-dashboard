@@ -36,3 +36,9 @@ DEBUG = env('DEBUG', default=False)
 # -----------------------------------------------------------------------------
 DATABASE_URL = env('DATABASE_URL',
                    default='postgresql://127.0.0.1:5432/logistiko')
+
+# -----------------------------------------------------------------------------
+# Server
+# -----------------------------------------------------------------------------
+SERVER_HOST = env('SERVER_HOST', default='0.0.0.0')
+SERVER_PORT = env('SERVER_PORT', default='5000')

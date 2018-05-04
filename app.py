@@ -27,6 +27,7 @@ from parsers import (
     load_so_item_status_from_file,
     load_so_item_status_history_from_file,
 )
+from services.server import run_server
 
 
 def main(args):
@@ -106,7 +107,10 @@ def load_so_item_status_history(path, db_service):
 
 def run():
     print('Running the server...')
-
+    run_server(host=settings.SERVER_HOST,
+           port=settings.SERVER_PORT,
+           debug=settings.DEBUG,
+           secret_key=settings.SECRET_KEY)
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.0.1')
