@@ -56,16 +56,16 @@ $ vi .proj-env
 $ app init db
 ```
 
-## Load data from existing Excel and CSV files.
+## Load data from existing Excel and CSV files
 
 ```
 $ app load analysis <path_to_file>
+$ app load sales_order --status <path_to_file>
 $ app load sales_order --item <path_to_file>
-$ app load sales_order --item_status <path_to_file>
-$ app load sales_order --item_status_history <path_to_file>
+$ app load sales_order --history <path_to_file>
 ```
 
-## Running the server and viewing the dashboard.
+## Running the server and viewing the dashboard
 
 ```
 $ app run

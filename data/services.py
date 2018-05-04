@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from .utils import destroy_database, initialize_database
-from .models import Package, Region
+from .models import Item, ItemStatus, ItemStatusHistory, Package, Region
 
 
 class DataService(object):
@@ -94,3 +94,78 @@ class DataService(object):
         self.session.commit()
         
         return new_package
+    
+    def add_so_item(self, id_sales_order_item, bob_id_sales_order_item,
+                    fk_sales_order, fk_sales_order_item_status,
+                    fk_delivery_type, unit_price, tax_amount, paid_price,
+                    name, sku, created_at, updated_at, last_status_change,
+                    original_unit_price, shipping_type, real_delivery_date,
+                    bob_id_supplier, is_marketplace):
+        """
+        Creates and saves a new Item to the database.
+        
+        Columns taken from ims_sales_order_item.csv.
+        """
+        new_item = Item(id_sales_order_item=id_sales_order_item,
+                        bob_id_sales_order_item=bob_id_sales_order_item,
+                        fk_sales_order=fk_sales_order,
+                        fk_sales_order_item_status=fk_sales_order_item_status,
+                        fk_delivery_type=fk_delivery_type,
+                        unit_price=unit_price,
+                        tax_amount=tax_amount,
+                        paid_price=paid_price,
+                        name=name,
+                        sku=sku,
+                        created_at=created_at,
+                        updated_at=updated_at,
+                        last_status_change=last_status_change,
+                        original_unit_price=original_unit_price,
+                        shipping_type=shipping_type,
+                        real_delivery_date=real_delivery_date,
+                        bob_id_supplier=bob_id_supplier,
+                        is_marketplace=is_marketplace)
+        
+        self.session.add(new_item)
+        self.session.commit()
+        
+        return new_item
+    
+    def add_so_item_status(self, id_sales_order_item_status, fk_oms_function,
+                           status, desc, deprecated, updated_at):
+        """
+        Creates and saves a new Item Status to the database.
+        
+        Columns taken from ims_sales_order_item_status.csv.
+        """
+        new_status = ItemStatus(
+            id_sales_order_item_status=id_sales_order_item_status,
+            fk_oms_function=fk_oms_function,
+            status=status,
+            desc=desc,
+            deprecated=deprecated,
+            updated_at=updated_at)
+        
+        self.session.add(new_status)
+        self.session.commit()
+        
+        return new_status
+    
+    def add_so_item_status_history(self, id_sales_order_item_status_history,
+                                   fk_sales_order_item,
+                                   fk_sales_order_item_status, created_at):
+        """
+        Creates and saves a new Item Status History to the database.
+        
+        Columns taken from ims_sales_order_item_status_history.csv.
+        """
+        new_history = ItemStatusHistory(
+            id_sales_order_item_status_history=\
+                id_sales_order_item_status_history,
+            fk_sales_order_item=fk_sales_order_item,
+            fk_sales_order_item_status=fk_sales_order_item_status,
+            created_at=created_at)
+        
+        self.session.add(new_history)
+        self.session.commit()
+        
+        return new_history

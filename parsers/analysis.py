@@ -72,22 +72,6 @@ def load_package_sheet(workbook, db_service, sheet_name=None):
     print(f'Processed {i} package(s).')
 
 
-def process_package_data(data, db_service):
-    # populate region
-    data['region'] = None
-    
-    # populate lead_time
-    data['lead_time'] = data['delivered_at'] - data['shipped_at']
-    
-    db_service.add_package(address=data['address'],
-                           region=data['region'],
-                           package_number=data['package_number'],
-                           shipped_at=data['shipped_at'],
-                           delivered_at=data['delivered_at'],
-                           lead_time=data['lead_time'],
-                           id_=data['id'])
-
-
 def load_region_sheet(workbook, db_service, sheet_name=None):
     """
     Processes worksheets with the following headers:
@@ -121,6 +105,22 @@ def load_region_sheet(workbook, db_service, sheet_name=None):
             process_region_data(data=data, db_service=db_service)
     
     print(f'Processed {i} region(s).')
+
+
+def process_package_data(data, db_service):
+    # populate region
+    data['region'] = None
+    
+    # populate lead_time
+    data['lead_time'] = data['delivered_at'] - data['shipped_at']
+    
+    db_service.add_package(address=data['address'],
+                           region=data['region'],
+                           package_number=data['package_number'],
+                           shipped_at=data['shipped_at'],
+                           delivered_at=data['delivered_at'],
+                           lead_time=data['lead_time'],
+                           id_=data['id'])
 
 
 def process_region_data(data, db_service):

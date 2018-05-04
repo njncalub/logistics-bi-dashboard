@@ -6,7 +6,7 @@
 Usage:
   app.py (init|drop) db
   app.py load analysis <FILE>
-  app.py load sales_order (--item|--item_status|--item_status_history) <FILE>
+  app.py load sales_order (--item|--status|--history) <FILE>
   app.py run
   app.py (-h | --help)
   app.py --version
@@ -21,7 +21,12 @@ from docopt import docopt
 
 from core import settings
 from data.services import DataService
-from parsers import load_analysis_from_file
+from parsers import (
+    load_analysis_from_file,
+    load_so_item_from_file,
+    load_so_item_status_from_file,
+    load_so_item_status_history_from_file,
+)
 
 
 def main(args):
@@ -48,11 +53,13 @@ def main(args):
             return
         
         if args['--item']:
-            load_sales_order(table='item', path=file_path)
-        elif args['--item_status']:
-            load_sales_order(table='item_status', path=file_path)
-        elif args['--item_status_history']:
-            load_sales_order(table='item_status_history', path=file_path)
+            load_sales_order(table='item', path=file_path, db_service=db)
+        elif args['--status']:
+            load_sales_order(table='item_status', path=file_path,
+                             db_service=db)
+        elif args['--history']:
+            load_sales_order(table='item_status_history', path=file_path,
+                             db_service=db)
     
     elif args['run']:
         run()
@@ -60,7 +67,6 @@ def main(args):
 
 def init_db(db_service):
     print('Initializing the database...')
-    db_service.drop_database()
     db_service.init_database()
 
 
@@ -74,25 +80,28 @@ def load_analysis(path, db_service):
     load_analysis_from_file(path=path, db_service=db_service)
 
 
-def load_sales_order(table, path):
+def load_sales_order(table, path, db_service):
     if table == 'item':
-        load_sales_order_item(path)
+        load_so_item(path=path, db_service=db_service)
     elif table == 'item_status':
-        load_sales_order_item_status(path)
+        load_so_item_status(path=path, db_service=db_service)
     elif table == 'item_status_history':
-        load_sales_order_item_status_history(path)
+        load_so_item_status_history(path=path, db_service=db_service)
 
 
-def load_sales_order_item(path):
+def load_so_item(path, db_service):
     print('Loading Sales Order Item...')
+    load_so_item_from_file(path=path, db_service=db_service)
 
 
-def load_sales_order_item_status(path):
+def load_so_item_status(path, db_service):
     print('Loading Sales Order Item Status...')
+    load_so_item_status_from_file(path=path, db_service=db_service)
 
 
-def load_sales_order_item_status_history(path):
+def load_so_item_status_history(path, db_service):
     print('Loading Sales Order Item Status History...')
+    load_so_item_status_history_from_file(path=path, db_service=db_service)
 
 
 def run():
