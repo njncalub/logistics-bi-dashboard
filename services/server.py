@@ -1,33 +1,33 @@
 from flask import Flask, request, send_from_directory
 
+from core import settings
 from views import home
 from views import analysis as analysis_view
 from views import custom as custom_view
 from views import sales_order as sales_order_view
 
 
+app = Flask('Logistiko')
+
+
 def run_server(*args, **kwargs):
     options = {
         'host': '0.0.0.0',
         'port': '5000',
-        'debug': True,
+        'debug': False,
         'secret_key': 'SET-YOUR-SECRET-KEY',
     }
     options.update(kwargs)
     
-    app = Flask('Logistiko')
-    
     # set the SECRET_KEY before loading the config
     SECRET_KEY = options['secret_key']
-    
-    set_app_routes(app)
     
     app.run(host=options['host'],
             port=options['port'],
             debug=options['debug'])
 
 
-def set_app_routes(app):
+def set_app_routes():
     app.add_url_rule(rule='/favicon.ico', endpoint='favicon',
                      view_func=home.favicon, methods=['GET'])
     
@@ -61,3 +61,13 @@ def set_app_routes(app):
                      view_func=custom_view.view_situation_2_5, methods=['GET'])
     app.add_url_rule(rule='/custom:2.6', endpoint='custom:2.6',
                      view_func=custom_view.view_situation_2_6, methods=['GET'])
+
+
+set_app_routes()
+
+
+if __name__ == '__main__':
+    run_server(host=settings.SERVER_HOST,
+               port=settings.SERVER_PORT,
+               debug=settings.DEBUG,
+               secret_key=settings.SECRET_KEY)
