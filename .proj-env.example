@@ -1,0 +1,3 @@
+SECRET_KEY="SET-YOUR-SECRET-KEY"
+
+DATABASE_URL="postgresql://logistiko_user:YOUR-STRONG-PASSWORD@127.0.0.1:5432/logistiko_db"

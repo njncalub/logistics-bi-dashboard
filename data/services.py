@@ -1,0 +1,66 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from .utils import initialize_database
+from .models import Package, Region
+
+
+class DataService(object):
+    """
+    Service for handling the database connection.
+    """
+    
+    def __init__(self, engine):
+        if not engine:
+            raise ValueError('The values specified in engine parameter has ' \
+                             'to be supported by SQLAlchemy.')
+        
+        self.engine = engine
+        db_engine = create_engine(engine)
+        db_session = sessionmaker(bind=db_engine)
+        self.session = db_session()
+    
+    def init_database(self):
+        initialize_database(engine=self.engine)
+    
+    def add_region(self, region, major_region, id_=None):
+        """
+        Creates and saves a new Region to the database.
+        
+        :param id_: Existing id of the region
+        :param region: Name of the region
+        :param major_region: Name of the Major Region
+        """
+        new_region = Region(id=id_,
+                            region=region,
+                            major_region=major_region)
+        self.session.add(new_region)
+        self.session.commit()
+        
+        return new_region.id
+    
+    def add_package(self, address, region_id, package_number, shipped_at,
+                    delivered_at, lead_time=None, id_=None):
+        """
+        Creates and saves a new Package to the database.
+        
+        :param id_: Existing id of the package
+        :param address: The address of the recipient
+        :param region_id: FK of the region
+        :param package_number: Unique package number
+        :param shipped_at: The time when the package is shipped
+        :param delivered_at: The time when the package is delivered to customer
+        :param lead_time: The time from when the package is shipped
+            until it is delievered to customer
+        """
+        new_package = Package(id=id_,
+                              address=address,
+                              region=region_id,
+                              package_number=package_number,
+                              shipped_at=shipped_at,
+                              delivered_at=delivered_at,
+                              lead_time=lead_time)
+        self.session.add(new_package)
+        self.session.commit()
+        
+        return new_package.id

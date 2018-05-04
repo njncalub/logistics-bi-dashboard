@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Business Intelligence Dashboard.
+"""Logistiko: Business Intelligence Dashboard.
 
 Usage:
   app.py init_db
@@ -19,12 +19,16 @@ Options:
 
 from docopt import docopt
 
+from core import settings
+from data.services import DataService
 from parsers import load_analysis_from_file
 
 
 def main(args):
+    db = DataService(engine=settings.DATABASE_URL)
+    
     if args['init_db']:
-        init_db()
+        db.init_database()
     
     elif args['load'] and args['analysis']:
         file_path = args['<FILE>']

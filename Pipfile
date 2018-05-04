@@ -9,6 +9,10 @@ name = "pypi"
 
 docopt = "*"
 openpyxl = "*"
+sqlalchemy = "*"
+envparse = "*"
+python-dotenv = "*"
+"psycopg2-binary" = "*"
 
 
 [dev-packages]
