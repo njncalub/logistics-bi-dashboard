@@ -4,6 +4,105 @@ from sqlalchemy.sql import text
 from services.database import db_service
 
 
+def view_situation_1_5():
+    # TODO: not yet working
+    query = """
+SELECT
+  r.major_region,
+  PERCENTILE_DISC(0.9) WITHIN GROUP (ORDER BY p.lead_time) AS pd90
+FROM
+  package AS p,
+  region AS r
+WHERE
+  p.region_id = r.id
+GROUP BY
+  r.major_region
+;
+    """.strip()
+    result = db_service.db_engine.execute(text(query))
+    
+    context = {}
+    context['query'] = query
+    context['title'] = 'Situation 1.5'
+    context['description'] = (
+        "Perform an analysis on the data provided to determine the range of "
+        "time where 90% package is delivered in General (All regions) and in "
+        "GMA. Provide your data and draw a graph on the web page "
+        "demonstrating your answer."
+        "\n\n"
+        "**TODO: Not yet working.**"
+    )
+    context['headers'] = ['major_region', 'pd90']
+    context['rows'] = result.fetchall()
+    
+    return render_template('custom/situation.html', context=context)
+
+
+def view_situation_1_6():
+    query = """
+SELECT
+  r.major_region,
+  COUNT(p.id) as volume,
+  MIN(p.lead_time) AS min_lead_time
+FROM
+  package AS p,
+  region AS r
+WHERE
+  p.region_id = r.id
+GROUP BY
+  r.major_region
+;
+    """.strip()
+    result = db_service.db_engine.execute(text(query))
+    
+    context = {}
+    context['query'] = query
+    context['title'] = 'Situation 1.6'
+    context['description'] = (
+        "What are your other findings from the provided datasets? \n\n"
+        "There are some lead times which are just minutes. Although "
+        "it only happens to a small percentage of packages, we can still "
+        "check them."
+    )
+    context['headers'] = ['major_region', 'volume', 'min_lead_time']
+    context['rows'] = result.fetchall()
+    
+    return render_template('custom/situation.html', context=context)
+
+
+def view_situation_1_7():
+    query = """
+SELECT
+  r.major_region,
+  COUNT(p.id) as volume,
+  AVG(p.lead_time) AS avg_lead_time
+FROM
+  package AS p,
+  region AS r
+WHERE
+  p.region_id = r.id
+GROUP BY
+  r.major_region
+;
+    """.strip()
+    result = db_service.db_engine.execute(text(query))
+    
+    context = {}
+    context['query'] = query
+    context['title'] = 'Situation 1.7'
+    context['description'] = (
+        "Draw a graph to show the package volume and average lead time by "
+        "Major Regions."
+    )
+    
+    context['show_chart'] = True
+    context['headers'] = ['major_region', 'volume', 'avg_lead_time']
+    context['rows'] = result.fetchall()
+    
+    return render_template('custom/s1_7.html', context=context)
+    
+
+
 def view_situation_2_1():
     query = """
 SELECT

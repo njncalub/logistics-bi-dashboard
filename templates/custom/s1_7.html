@@ -1,0 +1,91 @@
+{% extends "custom/situation.html" %}
+
+{% block extra_body_js %}
+<script type="text/javascript">
+  var ctx, data;
+  
+  ctx = document.getElementById("myBarChart1").getContext('2d');
+  data = {
+    labels: [
+      'GMA',
+      'Luzon',
+      'Visayas',
+      'Mindanao'
+    ],
+    datasets: [{
+      label: "By Volume",
+      data: [0, 0, 0, 0],
+      fill: false,
+      backgroundColor: [
+        "rgba(255, 99, 132, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
+        "rgba(255, 205, 86, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+      ],
+      borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+      ],
+      borderWidth: 1
+    }]
+  };
+  var myBarChart1 = new Chart(ctx, {
+    data: data,
+    type: 'bar',
+    options: {
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    }
+  });
+  
+  ctx = document.getElementById("myBarChart2").getContext('2d');
+  data = {
+    labels: [
+      'GMA',
+      'Luzon',
+      'Visayas',
+      'Mindanao'
+    ],
+    datasets: [{
+      label: "By Lead Time",
+      data: [0, 0, 0, 0],
+      fill: false,
+      backgroundColor: [
+        "rgba(255, 99, 132, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
+        "rgba(255, 205, 86, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+      ],
+      borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+      ],
+      borderWidth: 1
+    }]
+  };
+  var myBarChart2 = new Chart(ctx, {
+    data: data,
+    type: 'horizontalBar',
+    options: {
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    }
+  });
+</script>
+{% endblock extra_body_js %}
